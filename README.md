@@ -1,2 +1,2 @@
 # Eureka
-Eureka(ERK) : Ethereum dapp for scientific article
+Eureka Project : Decentralize Academic Publishing
