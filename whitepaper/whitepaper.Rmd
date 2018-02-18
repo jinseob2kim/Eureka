@@ -1,8 +1,8 @@
 ---
 title: "Eureka Project"
-author: "김진섭"
+author: "Jinseob Kim"
 date: "February, 2018"
-csl: /home/secondmath/Dropbox/myarticle/bibtex_style/sage-vancouver.csl
+csl: /home/secondmath/Dropbox/myarticle/bibtex_style/plos.csl
 output:
   pdf_document:
     fig_height: 6
@@ -23,7 +23,7 @@ output:
     toc: yes
 header-includes: \usepackage{kotex} \usepackage[doublespacing]{setspace}  \usepackage{multirow}
 subtitle: "Decentralize Academic Publishing"
-bibliography: references.bib
+bibliography: [references.bib, refarxiv.bib]
 editor_options: 
   chunk_output_type: console
 ---
@@ -41,16 +41,24 @@ options("citation_format" = "pandoc")
 
 ```{r,echo=FALSE}
 setwd("/home/secondmath/Dropbox/ethereum/Eureka/whitepaper")
-fwrite(list(""),"references.bib")
+write("","references.bib")
 ```
 
-```{r,echo=FALSE}
-citew= function(DOI, bib="references.bib"){
-  bib.obj = citep(DOI)
-  write.bibtex(file=bib,append = T)
-  return(bib.obj)
+```{r,echo=FALSE,eval=T}
+citel=function(DOI){
+  bib.obj=citep(DOI)
+  return(substr(bib.obj,1,nchar(bib.obj)-1))
 }
-#a=citew(c("10.1038/nature24671","10.1016/j.ajhg.2018.01.014"))
+
+citer=function(DOI){
+  bib.obj=citep(DOI)
+  return(substr(bib.obj,2,nchar(bib.obj)))
+}
+
+citeb=function(DOI){
+  bib.obj=citep(DOI)
+  return(substr(bib.obj,2,nchar(bib.obj)-1))
+}
 ```
 
 
@@ -64,10 +72,13 @@ citew= function(DOI, bib="references.bib"){
 
 ## Member
 
-랄라라 간다`r citew(c("10.1038/nature24671","10.1016/j.ajhg.2018.01.014"))`. 
+랄라라 간다`r citep(c("10.1038/nature24671","10.1016/j.ajhg.2018.01.014"))`. 간다`r citel("10.1038/nature25744")`;@He_2018]. 가자[@He_2018;`r citer("10.1038/nature24671")`.
 
+arxiv도 같이 간다[@arxiv1403.2036;`r citeb("10.1038/nature24671")`;`r citer("10.1038/nature24671")`.
 
-
+```{r,echo=F}
+write.bibtex(file="references.bib")
+```
 ## References
 
 
