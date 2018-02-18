@@ -4,6 +4,9 @@ author: "Jinseob Kim"
 date: "February, 2018"
 csl: /home/secondmath/Dropbox/myarticle/bibtex_style/plos.csl
 output:
+  pdf_document:
+    fig_height: 6
+    fig_width: 9
   html_document:
     code_folding: show
     fig_height: 6
@@ -14,9 +17,6 @@ output:
     toc_depth: 3
     toc_float:
       collapsed: no
-  pdf_document:
-    fig_height: 6
-    fig_width: 9
   word_document:
     fig_height: 6
     fig_width: 9
@@ -44,7 +44,12 @@ setwd("/home/secondmath/Dropbox/ethereum/Eureka/whitepaper")
 write("","references.bib")
 ```
 
-
+```{r,echo=FALSE,eval=T}
+citeb=function(DOI){
+  bib.obj=citep(DOI)
+  return(substr(bib.obj,2,nchar(bib.obj)-1))
+}
+```
 
 
 ## Background
@@ -60,6 +65,8 @@ write("","references.bib")
 랄라라 간다`r citep(c("10.1038/nature24671","10.1016/j.ajhg.2018.01.014"))`. 간다[`r citet("10.1038/nature25744")`;@He_2018]. 가자[@He_2018;`r citet("10.1038/nature24671")`].
 
 arxiv도 같이 간다[@arxiv1403.2036;`r citet("10.1038/nature24671")`;`r citet("10.1038/nature24671")`].
+
+새로만들었다[@arxiv1403.2036;`r citeb(c("10.1038/nature24671","10.1016/j.ajhg.2018.01.014"))`;`r citet("10.1038/nature24671")`].
 
 ```{r,echo=F}
 write.bibtex(file="references.bib")
